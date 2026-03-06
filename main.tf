@@ -156,6 +156,17 @@ resource "aws_lambda_function" "job_fetcher" {
 }
 
 
+# 12. S3 Bucket for Athena Query Results
+resource "aws_s3_bucket" "athena_results" {
+  bucket        = "ralph-job-market-query-results-2026" # Must be unique
+  force_destroy = true
+}
+
+# 13. AWS Glue Database for Athena
+resource "aws_glue_catalog_database" "job_market_db" {
+  name = "job_market_database"
+}
+
 
 # 1. The Transformer Lambda Resource
 resource "aws_lambda_function" "job_transformer" {
